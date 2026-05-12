@@ -1,4 +1,4 @@
-import serviceMovie from "./js/tmbd-api";
+import { serviceMovie, getAndStoreGenres } from "./js/tmbd-api";
 import { createMarkup, showLoadMoreButton, hideLoadMoreButton } from "./js/render-functions";
 
 const movieList = document.querySelector(".movie-list");
@@ -8,6 +8,13 @@ let allMovies = [];
 let showMoviesCount = 0;
 let currentPage = 1;
 let isLastPage = false;
+
+async function init() {
+    await getAndStoreGenres();
+    await loadAndShow();
+}
+
+init();
 
 async function loadAndShow() {
     loadMoreBtn.disabled = true;
@@ -45,6 +52,20 @@ async function loadAndShow() {
     }
 }
 
-loadAndShow();
 loadMoreBtn.addEventListener("click", loadAndShow);
+movieList.addEventListener("click", (event) => {
+    const card = event.target.closest(".movie-list-item");
+    console.log(card);
+    
+    if (!card) return;
 
+    const isAlreadyOpen = card.classList.contains('is-visible');
+
+    document.querySelectorAll('.movie-list-item.is-visible').forEach(item => {
+        item.classList.remove('is-visible');
+    });
+
+    if (!isAlreadyOpen) {
+        card.classList.add('is-visible');
+    }
+});

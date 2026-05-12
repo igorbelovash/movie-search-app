@@ -1,7 +1,9 @@
+import { genresDictionary } from "./tmbd-api";
+
 const loadMoreBtn = document.querySelector(".load-more-btn");
 
 function createMarkup(arr) {
-    return arr.map(({ id, poster_path, original_title, release_date, overview}) => 
+    return arr.map(({ id, poster_path, original_title, release_date, overview, genre_ids}) => 
         `
             <li class="movie-list-item" data-id=${id}>
                 <div class="movie-img-wrapper">
@@ -10,7 +12,10 @@ function createMarkup(arr) {
                 </div>
                 <div class="movie-content">
                     <h4 class="movie-title">${original_title}</h4>
-                    <p class="release-date">${release_date}</p>
+                    <div class="movie-info">
+                        <p class="release-date">${release_date.split('-')[0]}</p>
+                        <p class="movie-genre">${genresDictionary[genre_ids[0]] ? `&nbsp;| ${genresDictionary[genre_ids[0]]}` : ''}</p>
+                    </div>
                 </div>
             </li>
         `
