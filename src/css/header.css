@@ -19,12 +19,129 @@
     display: none;
 }
 
-.search-open-btn {
-    background: transparent;
-    border: none;
-    display: block;
+.header-search-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: transparent;
+    border-radius: 20px;
+    padding: 5px 10px;
+    flex-direction: row-reverse;
+    width: 40px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            background-color 0.3s ease;
+    overflow: visible;
+    margin-left: auto;
+}
+
+.header-search-form.is-focused {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
 }
 
 .header-search-input {
-    display: none;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+    min-width: 0;
 }
+
+.header-search-form.is-focused .header-search-input {
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    padding-left: 10px;
+
+}
+
+.search-open-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-search-icon {
+    fill: #fff;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 400px;
+    background-color: #1a1a1a;
+    z-index: 1000;
+    display: none;
+    max-height: 380px;
+    overflow-y: auto;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#search-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+#search-results::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+#search-results::-webkit-scrollbar-thumb {
+    background: #4faaff;
+    border-radius: 10px;
+}
+
+#search-results.is-visible {
+    display: block;
+}
+
+.search-item-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.movie-name {
+    color: #4faaff;
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-year {
+    color: #888;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.movie-rating {
+    margin-left: auto;
+    background: #444;
+    color: #eee;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.search-section-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+

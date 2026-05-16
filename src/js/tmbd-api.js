@@ -3,6 +3,7 @@ import axios from 'axios';
 const BASE_URL = "https://api.themoviedb.org/3";
 const TRENDING_END_POINT = "/trending/movie/day";
 const GENRE_END_POINT = "/genre/movie/list";
+const SEARCH_END_POINT = "/search/movie";
 const token = import.meta.env.VITE_MOVIE_TOKEN;
 
 let genresDictionary = {};
@@ -10,7 +11,7 @@ let genresDictionary = {};
 async function serviceMovie(page) {
     const { data } = await axios.get(`${BASE_URL}${TRENDING_END_POINT}`, {
         params: {
-            page: `${page}`,
+            page,
         },
         headers: {
             accept: 'application/json',
@@ -50,4 +51,20 @@ async function getAndStoreGenres() {
     }
 }
 
-export { serviceMovie, getAndStoreGenres, genresDictionary };
+async function fetchMoviesByQuery(query) {
+    const { data } = await axios.get(`${BASE_URL}${SEARCH_END_POINT}`, {
+        params: {
+            query,
+            include_adult: true,
+            language: "en",
+        },
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    return data;
+}
+
+export { serviceMovie, getAndStoreGenres, genresDictionary, fetchMoviesByQuery };

@@ -18,7 +18,35 @@
 }
 
 .slider-arrow {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
     display: none;
+    height: 36px;
+    width: 36px;
+}
+
+.prev-icon-btn {
+    fill: #ffffff;
+    transition: filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+.next-icon-btn {
+    fill: #ffffff;
+    transition: filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+.prev-icon-btn:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+    transform: scale(1.1);
+}
+
+.next-icon-btn:hover {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+    transform: scale(1.1);
 }
 
 .movie-list {
@@ -95,6 +123,15 @@
     font-weight: 400;
     line-height: 114%;
     color: #000;
+}
+
+.load-more-btn {
+    margin: 40px auto;
+    display: block;
+    border-radius: 50px;
+    background: none;
+    color: #fff;
+    border: none;
 }
 
 @media screen and (min-width: 768px) {

@@ -1,5 +1,6 @@
-import { serviceMovie, getAndStoreGenres } from "./js/tmbd-api";
+import { serviceMovie, getAndStoreGenres} from "./js/tmbd-api";
 import { createMarkup, showLoadMoreButton, hideLoadMoreButton } from "./js/render-functions";
+import { initSearch } from "./js/search";
 
 const movieList = document.querySelector(".movie-list");
 const loadMoreBtn = document.querySelector(".load-more-btn");
@@ -24,6 +25,8 @@ async function init() {
 }
 
 init();
+
+initSearch();
 
 async function loadAndShow() {
     loadMoreBtn.disabled = true;
@@ -69,7 +72,7 @@ loadMoreBtn.addEventListener("click", loadAndShow);
 
 movieList.addEventListener("click", (event) => {
     const card = event.target.closest(".movie-list-item");
-    
+
     if (!card) return;
     const isAlreadyOpen = card.classList.contains('is-visible');
 
@@ -82,28 +85,34 @@ movieList.addEventListener("click", (event) => {
     }
 });
 
-nextBtn.addEventListener('click', async () => {
+const updateListTransform = () => {
+    movieList.style.transform = `translateX(${currentOffset}px)`;
+};
+
+function moveSlider(direction) {
     if (window.innerWidth < 1200) return;
 
-    const maxOffset = -(movieList.scrollWidth - listContainer.clientWidth);
+    if (direction === 'next') {
+        const maxOffset = -(movieList.scrollWidth - listContainer.clientWidth);
+        if (currentOffset > maxOffset) {
+            currentOffset -= step;
+        }
+    } else if (direction === 'back') {
+        if (currentOffset < 0) {
+            currentOffset += step;
+        }
+    }
     
+    updateListTransform();
+}
+
+nextBtn.addEventListener('click', async () => {
+    const maxOffset = -(movieList.scrollWidth - listContainer.clientWidth);
     if (currentOffset <= maxOffset + (step * 3) && !isLastPage) {
         await loadAndShow();
     }
 
-    const newMaxOffset = -(movieList.scrollWidth - listContainer.clientWidth);
-
-    if (currentOffset > newMaxOffset) {
-        currentOffset -= step;
-        movieList.style.transform = `translateX(${currentOffset}px)`;
-    }
+    moveSlider('next');
 });
 
-prevBtn.addEventListener('click', () => {
-    if (window.innerWidth < 1200) return;
-
-    if (currentOffset < 0) {
-        currentOffset += step;
-        movieList.style.transform = `translateX(${currentOffset}px)`;
-    }
-});
+prevBtn.addEventListener('click', () => moveSlider('back'));

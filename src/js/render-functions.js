@@ -30,4 +30,18 @@ function hideLoadMoreButton() {
     loadMoreBtn.classList.add("hidden");
 }
 
-export { createMarkup , showLoadMoreButton, hideLoadMoreButton};
+function renderSearchResults(arr) {
+    return arr.map(({ title, release_date, vote_average }) => 
+        `
+        <li class="search-section-item">
+            <a href="#" class="search-item-link">
+                <span class="movie-name">${title}</span>
+                <span class="movie-year">${release_date ? release_date.split('-')[0] : 'n/a'}</span>
+                <span class="movie-rating">${vote_average.toFixed(2)}</span>
+            </a>
+        </li>
+        `
+    ).join("")
+}
+
+export { createMarkup , showLoadMoreButton, hideLoadMoreButton, renderSearchResults};
