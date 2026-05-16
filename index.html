@@ -11,8 +11,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script type="module" crossorigin src="/movie-search-app/index.js"></script>
-  <link rel="modulepreload" crossorigin href="/movie-search-app/assets/vendor-B1ZHW564.js">
-  <link rel="stylesheet" crossorigin href="/movie-search-app/assets/index-ptnoVw2L.css">
+  <link rel="modulepreload" crossorigin href="/movie-search-app/assets/vendor-DfocyEbf.js">
+  <link rel="stylesheet" crossorigin href="/movie-search-app/assets/vendor-DnveWo0P.css">
+  <link rel="stylesheet" crossorigin href="/movie-search-app/assets/index-CvqSwRKM.css">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     <div class="container header-container">
         <button type="button" class="sidebar-open-btn">
             <svg class="menu-icon-btn" width="20" height="20">
-                <use href="/movie-search-app/assets/sprite-D25MSF1U.svg#icon-menu"></use>
+                <use href="/movie-search-app/assets/sprite-Dfi2T5pv.svg#icon-menu"></use>
             </svg>
         </button>
         <nav class="header-navigation">
@@ -36,13 +37,17 @@
                 </li>
             </ul>
         </nav>
-        <form class="header-search-form">
+        <form id="search" class="header-search-form is-focused">
+            <input type="text" id="search-field" class="header-search-input" autocomplete="off" placeholder="Search">
             <button type="button" class="search-open-btn">
                 <svg class="header-search-icon" width="20" height="20">
-                    <use href="/movie-search-app/assets/sprite-D25MSF1U.svg#icon-search"></use>
+                    <use href="/movie-search-app/assets/sprite-Dfi2T5pv.svg#icon-search"></use>
                 </svg>
             </button>
-            <input type="text" class="header-search-input" placeholder="Search" />
+            <div id="search-results" class="search-results">
+                <ul class="search-section-list">
+                </ul>
+            </div>
         </form>
     </div>
 </header>
@@ -51,12 +56,20 @@
     <div class="container">
         <h2 class="trending-title">Trending</h2>
         <div class="slider-box">
-            <button type="button" class="slider-arrow prev-btn">←</button>
+            <button type="button" class="slider-arrow prev-btn">
+                <svg class="prev-icon-btn" width="20" height="20">
+                    <use href="/movie-search-app/assets/sprite-Dfi2T5pv.svg#icon-arrow-left"></use>
+                </svg>
+            </button>
             <div class="movie-list-container">
                 <ul class="movie-list">
                 </ul>
             </div>
-            <button type="button" class="slider-arrow next-btn">→</button>
+            <button type="button" class="slider-arrow next-btn">
+                <svg class="next-icon-btn" width="20" height="20">
+                    <use href="/movie-search-app/assets/sprite-Dfi2T5pv.svg#icon-arrow-right"></use>
+                </svg>
+            </button>
         </div>
         <button type="button" class="load-more-btn hidden">Load more</button>
     </div>
